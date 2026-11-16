@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Rishideep Roy</title>
+<meta name="description" content="Rishideep Roy — Lecturer in Statistics &amp; Probability, University of Leicester. Research in log-correlated Gaussian fields, interacting particle systems, and sports analytics.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap">
+
+<style>
+/* Layout: narrow-column academic page, sticky nav, typographically driven */
+:root {
+  --bg:         #FAFAF8;
+  --bg-alt:     #F3F2EF;
+  --bg-hover:   #ECEAE5;
+  --fg:         #1B2131;
+  --fg-muted:   #5A5F72;
+  --fg-faint:   #9EA3B4;
+  --accent:     #0C7571;
+  --accent-mid: #1A9994;
+  --accent-lt:  #E5F5F4;
+  --accent-txt: #0A5250;
+  --border:     #E0DEDA;
+  --border-lt:  #ECEAE5;
+
+  --ff-display: 'Crimson Pro', Georgia, serif;
+  --ff-body:    'Inter', system-ui, -apple-system, sans-serif;
+  --ff-label:   'Space Grotesk', system-ui, sans-serif;
+  --max-w:      800px;
+  --nav-h:      58px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:         #0D1320;
+    --bg-alt:     #131B2B;
+    --bg-hover:   #192436;
+    --fg:         #E0DEDA;
+    --fg-muted:   #878EA0;
+    --fg-faint:   #4E5468;
+    --accent:     #20BFBB;
+    --accent-mid: #18A8A4;
+    --accent-lt:  #082826;
+    --accent-txt: #20BFBB;
+    --border:     #1C2638;
+    --border-lt:  #172030;
+    color-scheme: dark;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--ff-body);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--fg);
+  background: var(--bg);
+  padding-left:  max(16px, env(safe-area-inset-left,  0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+
+/* NAV */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--nav-h);
+}
+.nav-name {
+  font-family: var(--ff-label);
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: var(--fg);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.nav-links {
+  display: flex;
+  gap: 0;
+  list-style: none;
+  margin: 0; padding: 0;
+}
+.nav-links a {
+  display: block;
+  padding: 0.4rem 0.7rem;
+  font-family: var(--ff-label);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--accent); }
+.nav-toggle {
+  display: none;
+  background: none; border: none;
+  cursor: pointer; color: var(--fg);
+  padding: 0.4rem;
+}
+
+/* MAIN */
+main { max-width: var(--max-w); margin: 0 auto; }
+
+/* HERO */
+.hero {
+  padding: 4.5rem 0 3rem;
+  border-bottom: 1px solid var(--border);
+}
+.hero-name {
+  font-family: var(--ff-display);
+  font-size: clamp(2.6rem, 8vw, 4.2rem);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+  margin: 0 0 0.75rem;
+  color: var(--fg);
+  text-wrap: balance;
+}
+.hero-role {
+  font-family: var(--ff-label);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--accent-txt);
+  margin: 0 0 0.25rem;
+}
+.hero-inst {
+  font-size: 0.9rem;
+  color: var(--fg-muted);
+  margin: 0 0 1.75rem;
+}
+.hero-tagline {
+  font-family: var(--ff-display);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--fg-muted);
+  margin: 0 0 2rem;
+}
+.hero-links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.hl {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.38rem 0.9rem;
+  font-family: var(--ff-label);
+  font-size: 0.775rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--fg);
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.hl:hover {
+  background: var(--accent-lt);
+  border-color: var(--accent-mid);
+  color: var(--accent-txt);
+}
+.hl svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+/* SECTIONS */
+section {
+  padding: 3.25rem 0;
+  border-bottom: 1px solid var(--border);
+}
+section:last-of-type { border-bottom: none; }
+
+.eyebrow {
+  font-family: var(--ff-label);
+  font-size: 0.675rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 1.1rem;
+}
+.section-h {
+  font-family: var(--ff-display);
+  font-size: 1.85rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.75rem;
+  text-wrap: balance;
+}
+
+/* ABOUT */
+.about-body { font-size: 1.025rem; line-height: 1.78; max-width: 68ch; }
+.about-body p { margin: 0 0 1rem; }
+.about-body p:last-child { margin: 0; }
+
+/* RESEARCH */
+.res-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.res-card { background: var(--bg); padding: 1.5rem 1.75rem; transition: background 0.15s; }
+.res-card:hover { background: var(--bg-alt); }
+.res-icon {
+  width: 34px; height: 34px;
+  background: var(--accent-lt);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent);
+  margin-bottom: 0.85rem;
+}
+.res-icon svg { width: 16px; height: 16px; }
+.res-name { font-family: var(--ff-label); font-size: 0.95rem; font-weight: 600; color: var(--fg); margin: 0 0 0.5rem; }
+.res-topics { font-size: 0.875rem; color: var(--fg-muted); line-height: 1.6; margin: 0; }
+
+/* PUBLICATIONS */
+.pub-filters { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.75rem; }
+.pf {
+  padding: 0.3rem 0.85rem;
+  font-family: var(--ff-label);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: transparent;
+  color: var(--fg-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.pf.active, .pf:hover { background: var(--accent-lt); border-color: var(--accent-mid); color: var(--accent-txt); }
+.pub-list { display: flex; flex-direction: column; }
+.pub-item {
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--border-lt);
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 0 1.1rem;
+  align-items: start;
+  min-width: 0;
+}
+.pub-item:last-child { border-bottom: none; }
+.pub-yr { font-family: var(--ff-label); font-size: 0.72rem; font-weight: 600; color: var(--fg-faint); padding-top: 0.22rem; font-variant-numeric: tabular-nums; }
+.pub-body { min-width: 0; }
+.pub-title { font-family: var(--ff-display); font-size: 1.025rem; font-style: italic; color: var(--fg); margin: 0 0 0.3rem; line-height: 1.4; }
+.pub-authors { font-size: 0.84rem; color: var(--fg-muted); margin: 0 0 0.25rem; }
+.pub-venue { font-size: 0.84rem; color: var(--fg-muted); margin: 0 0 0.5rem; }
+.pub-venue b { color: var(--fg); font-weight: 500; }
+.pub-chips { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.chip {
+  font-family: var(--ff-label);
+  font-size: 0.675rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-block;
+}
+.chip.arxiv  { background: var(--accent-lt); color: var(--accent-txt); }
+.chip.status { background: var(--bg-alt); color: var(--fg-muted); }
+.chip.doi    { background: var(--bg-alt); color: var(--fg-muted); }
+
+/* TEACHING */
+.teach-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+.teach-inst { font-family: var(--ff-label); font-size: 0.875rem; font-weight: 600; color: var(--fg); margin: 0 0 0.5rem; }
+.teach-courses { font-size: 0.875rem; color: var(--fg-muted); line-height: 1.65; margin: 0; }
+
+/* TALKS */
+.talk-list { display: flex; flex-direction: column; }
+.talk-item {
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--border-lt);
+  display: grid;
+  grid-template-columns: 5.25rem 1fr;
+  gap: 0 1rem;
+  align-items: start;
+  min-width: 0;
+}
+.talk-item:last-child { border-bottom: none; }
+.talk-date { font-family: var(--ff-label); font-size: 0.72rem; font-weight: 500; color: var(--fg-faint); padding-top: 0.1rem; font-variant-numeric: tabular-nums; }
+.talk-body { min-width: 0; }
+.talk-title { font-family: var(--ff-display); font-style: italic; font-size: 0.95rem; color: var(--fg); margin: 0 0 0.15rem; line-height: 1.4; }
+.talk-venue { font-size: 0.8rem; color: var(--fg-muted); margin: 0; }
+
+/* CONTACT */
+.contact-grid { display: flex; flex-wrap: wrap; gap: 2.25rem 3.5rem; margin-bottom: 2rem; }
+.contact-label { font-family: var(--ff-label); font-size: 0.675rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-faint); margin: 0 0 0.3rem; }
+.contact-val { font-size: 0.9rem; color: var(--fg); margin: 0; line-height: 1.5; }
+
+/* FOOTER */
+footer {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 2rem 0 2.5rem;
+  font-size: 0.78rem;
+  color: var(--fg-faint);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .nav-links { display: none; flex-direction: column; position: absolute; top: var(--nav-h); left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--border); z-index: 99; padding: 0.5rem 0; }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 0.7rem 1.25rem; }
+  .nav-toggle { display: flex; }
+  .pub-item { grid-template-columns: 1fr; gap: 0.2rem; }
+  .pub-yr { padding-top: 0; }
+  .talk-item { grid-template-columns: 1fr; gap: 0.1rem; }
+  .hero { padding: 3rem 0 2.25rem; }
+  section { padding: 2.5rem 0; }
+  .res-card { padding: 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#top" class="nav-name">Rishideep Roy</a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleNav()">
+      <svg width="20" height="14" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="0" y1="1" x2="20" y2="1"/><line x1="0" y1="7" x2="20" y2="7"/><line x1="0" y1="13" x2="20" y2="13"/>
+      </svg>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#teaching">Teaching</a></li>
+      <li><a href="#talks">Talks</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="top">
+
+  <div class="hero">
+    <h1 class="hero-name">Rishideep Roy</h1>
+    <p class="hero-role">Lecturer in Statistics &amp; Probability</p>
+    <p class="hero-inst">School of Computing and Mathematical Sciences &middot; University of Leicester</p>
+    <p class="hero-tagline">Probability &middot; Statistics &middot; Data Science</p>
+    <div class="hero-links">
+      <span class="hl">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        rishideep.roy@le.ac.uk
+      </span>
+      <a href="https://scholar.google.com/citations?user=" class="hl" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 100 14 7 7 0 000-14z"/></svg>
+        Google Scholar
+      </a>
+      <a href="https://orcid.org/0000-0000-0000-0000" class="hl" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 01-.947-.947c0-.516.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 3.853-2.253 3.853-3.713 0-2.253-1.303-3.731-3.806-3.731h-2.344z"/></svg>
+        ORCID
+      </a>
+      <a href="https://www.researchgate.net/profile/Rishideep-Roy" class="hl" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.586 0H4.414A4.414 4.414 0 000 4.414v15.172A4.414 4.414 0 004.414 24h15.172A4.414 4.414 0 0024 19.586V4.414A4.414 4.414 0 0019.586 0zm-7.361 17.496c-3.09 0-5.597-2.507-5.597-5.597 0-3.089 2.507-5.596 5.597-5.596.967 0 1.878.247 2.671.683l-1.084 1.878a3.282 3.282 0 00-1.587-.411c-1.823 0-3.302 1.479-3.302 3.303s1.479 3.302 3.302 3.302c1.577 0 2.9-1.106 3.234-2.582h-3.234v-2.14h5.569v.74c0 3.09-2.507 5.42-5.569 5.42z"/></svg>
+        ResearchGate
+      </a>
+      <a href="https://www.linkedin.com/in/rishideep-roy" class="hl" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://sites.google.com/site/royrishideep/home" class="hl" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        Website
+      </a>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="eyebrow">About</div>
+    <div class="about-body">
+      <p>I am a Lecturer in the School of Computing and Mathematical Sciences at the University of Leicester. My research lies at the intersection of probability theory and statistical modelling, with applications to real-world forecasting problems.</p>
+      <p>I work in two broad areas: the theoretical study of stochastic processes &mdash; including log-correlated Gaussian fields, interacting particle systems, and branching random walks &mdash; and applied statistical modelling, where I develop Bayesian methods for forecasting and decision-making, with particular focus on sports analytics and categorical time series.</p>
+      <p>Before joining Leicester, I was a Lecturer at the University of Essex and an Assistant Professor of Decision Sciences at IIM Bangalore. I completed my PhD in Statistics at the University of Chicago, where I worked on extreme values of log-correlated Gaussian fields, and my undergraduate and master&rsquo;s studies at the Indian Statistical Institute, Kolkata.</p>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="eyebrow">Research</div>
+    <h2 class="section-h">Research Interests</h2>
+    <div class="res-grid">
+      <div class="res-card">
+        <div class="res-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 20 Q5 4 9 12 Q13 20 17 8 Q19 2 22 6"/>
+          </svg>
+        </div>
+        <div class="res-name">Probability &amp; Stochastic Processes</div>
+        <p class="res-topics">Log-correlated Gaussian fields &middot; Branching random walks &middot; Interacting particle systems &middot; Frog and rumour models &middot; Percolation</p>
+      </div>
+      <div class="res-card">
+        <div class="res-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <rect x="3" y="12" width="4" height="8" rx="1"/><rect x="10" y="6" width="4" height="14" rx="1"/><rect x="17" y="9" width="4" height="11" rx="1"/>
+            <line x1="1" y1="21" x2="23" y2="21"/>
+          </svg>
+        </div>
+        <div class="res-name">Statistical Modelling &amp; Forecasting</div>
+        <p class="res-topics">Bayesian methods &middot; Categorical time series &middot; Election forecasting &middot; Spatio-temporal statistics &middot; Forecasting from partial information</p>
+      </div>
+      <div class="res-card">
+        <div class="res-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 3C9 7 9 17 12 21M12 3C15 7 15 17 12 21M3 12h18"/>
+          </svg>
+        </div>
+        <div class="res-name">Sports Analytics</div>
+        <p class="res-topics">Real-time in-game forecasting &middot; Football analytics &middot; Sports betting &middot; Player evaluation &middot; Statistical decision-making</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="eyebrow">Publications</div>
+    <h2 class="section-h">Selected Research</h2>
+    <div class="pub-filters">
+      <button class="pf active" onclick="filterPubs('all',this)">All</button>
+      <button class="pf" onclick="filterPubs('probability',this)">Probability</button>
+      <button class="pf" onclick="filterPubs('statistics',this)">Statistics</button>
+      <button class="pf" onclick="filterPubs('sports',this)">Sports Analytics</button>
+    </div>
+    <div class="pub-list" id="pubList"></div>
+  </section>
+
+  <section id="teaching">
+    <div class="eyebrow">Teaching</div>
+    <h2 class="section-h">Teaching</h2>
+    <div class="teach-grid">
+      <div>
+        <p class="teach-inst">University of Leicester <span style="font-weight:400;color:var(--fg-muted)">(current)</span></p>
+        <p class="teach-courses">School of Computing and Mathematical Sciences</p>
+      </div>
+      <div>
+        <p class="teach-inst">University of Essex</p>
+        <p class="teach-courses">Data Visualisation (MA304) &middot; Programming &amp; Text Analytics with R (MA331) &middot; Research Skills for PhD (MA903) &middot; Dissertation supervision</p>
+      </div>
+      <div>
+        <p class="teach-inst">IIM Bangalore</p>
+        <p class="teach-courses">PGP Decision Science I &middot; Doctoral Statistics II &middot; Doctoral Probability Theory &middot; PGPBA Advanced Probability &amp; Statistical Models &middot; PGPEM Decision Sciences</p>
+      </div>
+      <div>
+        <p class="teach-inst">University of Chicago</p>
+        <p class="teach-courses">Instructor: Elementary Statistics (STAT 20000) &middot; Teaching assistant for graduate and undergraduate probability &amp; statistics courses</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="talks">
+    <div class="eyebrow">Talks</div>
+    <h2 class="section-h">Recent Talks</h2>
+    <div class="talk-list" id="talkList"></div>
+  </section>
+
+  <section id="contact">
+    <div class="eyebrow">Contact</div>
+    <h2 class="section-h">Get in Touch</h2>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-label">Academic Email</p>
+        <p class="contact-val">rishideep.roy@le.ac.uk</p>
+      </div>
+      <div>
+        <p class="contact-label">Personal Email</p>
+        <p class="contact-val">dr.rishideeproy@gmail.com</p>
+      </div>
+      <div>
+        <p class="contact-label">Address</p>
+        <p class="contact-val">School of Computing and Mathematical Sciences<br>University of Leicester, Leicester, UK</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Rishideep Roy &middot; University of Leicester</span>
+  <span>Updated 2026</span>
+</footer>
+
+<script>
+const PUBS = [
+  { yr:"Sub.", cat:"sports",
+    title:"Optimising football transfer strategy under budget constraints: A weighted multi-criteria approach",
+    authors:"With T. Basu and S. Deb",
+    venue:"Submitted",
+    chips:[{t:"arXiv:2605.13926",h:"https://arxiv.org/abs/2605.13926",c:"arxiv"},{t:"Submitted",c:"status"}] },
+  { yr:"Sub.", cat:"statistics",
+    title:"A novel statistical framework to study the dynamics of official health communication: Evidence from India's COVID-19 newsletters",
+    authors:"With S. Basu Sarbadhikary, S. Deb and D. Ganapathy",
+    venue:"Submitted",
+    chips:[{t:"Submitted",c:"status"}] },
+  { yr:"Sub.", cat:"statistics",
+    title:"Nonparametric regression of spatio-temporal data using infinite-dimensional covariates",
+    authors:"With S. Roy, S. Deb and S. Karmakar",
+    venue:"Submitted",
+    chips:[{t:"arXiv:2604.01593",h:"https://arxiv.org/abs/2604.01593",c:"arxiv"},{t:"Submitted",c:"status"}] },
+  { yr:"2024", cat:"probability",
+    title:"How fast do rumours spread?",
+    authors:"With K. Saha",
+    venue:"Journal of Statistical Physics, 2024",
+    chips:[{t:"arXiv:2308.05940",h:"https://arxiv.org/abs/2308.05940",c:"arxiv"},{t:"DOI",h:"https://doi.org/10.1007/s10955-024-03343-3",c:"doi"}] },
+  { yr:"2024", cat:"sports",
+    title:"Real-time forecasting within soccer matches through a Bayesian lens",
+    authors:"With C. J. Divekar and S. Deb",
+    venue:"Journal of the Royal Statistical Society: Series A, 2024",
+    chips:[{t:"arXiv:2303.12401",h:"https://arxiv.org/abs/2303.12401",c:"arxiv"},{t:"JRSS:A",c:"doi"}] },
+  { yr:"Rev.", cat:"statistics",
+    title:"Effect of influence in voter models and its application in detecting significant interference in political elections",
+    authors:"With M. Paul and S. Deb",
+    venue:"Under revision, Advances in Statistical Analysis",
+    chips:[{t:"arXiv:2210.07744",h:"https://arxiv.org/abs/2210.07744",c:"arxiv"},{t:"Under revision",c:"status"}] },
+  { yr:"2024", cat:"statistics",
+    title:"Forecasting Elections from Partial Information Using a Bayesian Model for a Multinomial Sequence of Data",
+    authors:"With S. Deb and S. Das",
+    venue:"Journal of Forecasting, 2024",
+    chips:[{t:"arXiv:2104.02924",h:"https://arxiv.org/abs/2104.02924",c:"arxiv"},{t:"DOI",h:"https://doi.org/10.1002/for.3107",c:"doi"}] },
+  { yr:"2024", cat:"probability",
+    title:"A branching random walk in the presence of a hard wall",
+    authors:"",
+    venue:"Journal of Applied Probability, 2024",
+    chips:[{t:"arXiv:1806.02565",h:"https://arxiv.org/abs/1806.02565",c:"arxiv"},{t:"DOI",h:"https://doi.org/10.1017/jpr.2023.17",c:"doi"}] },
+  { yr:"2021", cat:"probability",
+    title:"Coexistence in discrete time Multi-type competing Frog Models",
+    authors:"With K. Saha",
+    venue:"Electronic Communications in Probability, 2021",
+    chips:[{t:"arXiv:2012.13549",h:"https://arxiv.org/abs/2012.13549",c:"arxiv"}] },
+  { yr:"2017", cat:"probability",
+    title:"Convergence of the centered maximum of log-correlated Gaussian fields",
+    authors:"With J. Ding and O. Zeitouni",
+    venue:"Annals of Probability, 2017",
+    chips:[{t:"arXiv:1503.04588",h:"https://arxiv.org/abs/1503.04588",c:"arxiv"}] },
+  { yr:"2011", cat:"statistics",
+    title:"Testing Homogeneity of Mean Directions for Circular Dispersion Models",
+    authors:"With A. Sengupta",
+    venue:"Calcutta Statistical Association Bulletin, 2011",
+    chips:[] },
+];
+
+const TALKS = [
+  {d:"Mar 2026", t:"How fast do rumours spread?", v:"IISER Kolkata"},
+  {d:"Jan 2026", t:"Nonparametric regression of spatio-temporal data using infinite-dimensional covariates", v:"ISI Delhi"},
+  {d:"Nov 2025", t:"Nonparametric regression of spatio-temporal data using infinite-dimensional covariates", v:"University of Southampton"},
+  {d:"Nov 2025", t:"How fast do rumours spread?", v:"University of Essex"},
+  {d:"Mar 2025", t:"Real-time within game forecasting in football", v:"University of Essex"},
+  {d:"Nov 2024", t:"How fast do rumours spread?", v:"IIM Bangalore"},
+  {d:"Apr 2024", t:"Electoral prediction using Multinomial Data with Randomly varying Probabilities", v:"University of Manchester"},
+  {d:"Feb 2023", t:"Some results in interacting particle systems", v:"IIT Bombay"},
+  {d:"Dec 2022", t:"Co-existence in probability models", v:"IISA 2022, Bengaluru"},
+  {d:"Dec 2022", t:"Effect of media attention on crude oil price volatility using a non-parametric time series regression", v:"CMStatistics 2022, King's College London"},
+  {d:"Jun 2022", t:"Coexistence in discrete time multi-type competing frog models", v:"IMS Annual Meeting, London"},
+  {d:"Jun 2019", t:"Location of near maxima of log-correlated Gaussian fields", v:"Fourth Indo-Russian Meeting, St. Petersburg"},
+  {d:"Mar 2019", t:"Maximum of log-correlated Gaussian fields", v:"NYU Shanghai"},
+  {d:"May 2018", t:"Extremes of log-correlated Gaussian fields", v:"HKUST, Hong Kong"},
+  {d:"Jan 2018", t:"Branching random walk pressed against a hard wall", v:"Third Indo-Russian Meeting, IISc Bangalore"},
+];
+
+function pubHTML(p) {
+  const parts = p.venue.split(',');
+  const chips = p.chips.map(c =>
+    c.h ? '<a href="' + c.h + '" target="_blank" rel="noopener" class="chip ' + c.c + '">' + c.t + '</a>'
+        : '<span class="chip ' + c.c + '">' + c.t + '</span>'
+  ).join('');
+  return '<div class="pub-item">' +
+    '<div class="pub-yr">' + p.yr + '</div>' +
+    '<div class="pub-body">' +
+      '<div class="pub-title">' + p.title + '</div>' +
+      (p.authors ? '<div class="pub-authors">' + p.authors + '</div>' : '') +
+      '<div class="pub-venue"><b>' + parts[0] + '</b>' + (parts.length > 1 ? ',' + parts.slice(1).join(',') : '') + '</div>' +
+      (chips ? '<div class="pub-chips">' + chips + '</div>' : '') +
+    '</div>' +
+  '</div>';
+}
+
+function renderPubs(cat) {
+  const list = cat === 'all' ? PUBS : PUBS.filter(p => p.cat === cat);
+  document.getElementById('pubList').innerHTML = list.map(pubHTML).join('');
+}
+
+function filterPubs(cat, btn) {
+  document.querySelectorAll('.pf').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPubs(cat);
+}
+
+function renderTalks() {
+  document.getElementById('talkList').innerHTML = TALKS.map(t =>
+    '<div class="talk-item">' +
+      '<div class="talk-date">' + t.d + '</div>' +
+      '<div class="talk-body">' +
+        '<div class="talk-title">' + t.t + '</div>' +
+        '<p class="talk-venue">' + t.v + '</p>' +
+      '</div>' +
+    '</div>'
+  ).join('');
+}
+
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+const SEC_IDS = ['about','research','publications','teaching','talks','contact'];
+const NAV_AS  = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', function() {
+  var cur = '';
+  SEC_IDS.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top < 90) cur = id;
+  });
+  NAV_AS.forEach(function(a) {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+  });
+}, { passive: true });
+
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('nav')) document.getElementById('navLinks').classList.remove('open');
+});
+
+renderPubs('all');
+renderTalks();
+</script>
+</body>
+</html>
